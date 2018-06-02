@@ -13,7 +13,7 @@ class BenchmarkDriver::RubyInterface
       name = executable.name
       envs.each do |env|
         prefix << env
-	name << "," << env
+        name << "," << env
       end
       executable.command = prefix + executable.command
       executable.name = name
@@ -25,7 +25,7 @@ end
 
 task :benchmark do
   Benchmark.driver(output: "rmrwr") do |x|
-    x.rbenv_with_env *<<~VERSIONS.scan(/[^ \n].*/)
+    x.rbenv_with_env *<<~VERSIONS.scan(/[^ \n].*/).select{|v| v !~ /#/}
       trunk
       trunk,--jit
       trunk WITHOUT_RMRWR=1
@@ -34,16 +34,38 @@ task :benchmark do
       trunk,--jit,--disable-gems
       trunk,--disable-gems WITHOUT_RMRWR=1
       trunk,--jit,--disable-gems WITHOUT_RMRWR=1
+      mjit-inline-send-yield,--jit,--disable-gems
+      mjit-inline-send-yield,--jit,--disable-gems  WITHOUT_RMRWR=1
     VERSIONS
     x.run_duration 10
     x.prelude <<~EOS
       $: << "#{File.expand_path(File.dirname(__FILE__) + "/../")}"
       require "rmrwr" unless ENV["WITHOUT_RMRWR"]
 
-      ary = (1..1_000_000).to_a
+      def int_times
+        1_000_000.times do end
+      end
+
+      def int_times_nest
+        1_000.times do
+          1_000.times do end
+        end
+      end
+
+      def range_each
+        (1..1_000_000).each do end
+      end
+
+      def range_each_nest
+        (1..1_000).each do
+          (1..1_000).each do end
+        end
+      end
     EOS
 
-    x.report "1_000_000.times", %{ 1_000_000.times do end }
-    x.report "(1..1_000_000).each", %{ (1..1_000_000).each do end }
+    x.report "Integer#times", %{ int_times }
+    x.report "nested Integer#times", %{ int_times_nest }
+    x.report "Range#each", %{ range_each }
+    x.report "nested Range#each", %{ range_each_nest }
   end
 end
