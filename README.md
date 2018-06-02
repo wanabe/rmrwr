@@ -29,17 +29,19 @@ You can `rake benchmark`.
 ```
 $ bundle exec rake benchmark
 Warming up --------------------------------------
-     1_000_000.times     33.719 i/s
+                         1_000_000.times     32.141 i/s
 Calculating -------------------------------------
-                          trunk  trunk,--jit  trunk,--disable-gems  trunk,--jit,--disable-gems 
-     1_000_000.times     32.479       42.123                31.591                      72.150 i/s -     337.000 times in 10.375782s 8.000376s 10.667680s 4.670809s
+                                          trunk,env  trunk,--jit,env  trunk,env,WITHOUT_RMRWR=1  trunk,--jit,env,WITHOUT_RMRWR=1  trunk,--disable-gems,env  trunk,--jit,--disable-gems,env 
+                         1_000_000.times     32.882           44.448                     39.098                           37.965                    32.950                          67.853 i/s -     321.000 times in 9.762163s 7.221858s 8.210086s 8.455069s 9.742078s 4.730806s
 
 Comparison:
-                  1_000_000.times
-trunk,--jit,--disable-gems:        72.2 i/s 
-         trunk,--jit:        42.1 i/s - 1.71x  slower
-               trunk:        32.5 i/s - 2.22x  slower
-trunk,--disable-gems:        31.6 i/s - 2.28x  slower
+                                      1_000_000.times
+          trunk,--jit,--disable-gems,env:        67.9 i/s 
+                         trunk,--jit,env:        44.4 i/s - 1.53x  slower
+               trunk,env,WITHOUT_RMRWR=1:        39.1 i/s - 1.74x  slower
+         trunk,--jit,env,WITHOUT_RMRWR=1:        38.0 i/s - 1.79x  slower
+                trunk,--disable-gems,env:        32.9 i/s - 2.06x  slower
+                               trunk,env:        32.9 i/s - 2.06x  slower
 
 ```
 
