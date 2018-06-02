@@ -44,5 +44,6 @@ task :benchmark do
     EOS
 
     x.report "1_000_000.times", %{ 1_000_000.times do end }
+    x.report "(1..1_000_000).each", %{ (1..1_000_000).each do end }
   end
 end

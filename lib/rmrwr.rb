@@ -4,3 +4,4 @@ module Rmrwr
 end
 
 require "rmrwr/integer"
+require "rmrwr/range"

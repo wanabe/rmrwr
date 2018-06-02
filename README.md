@@ -28,21 +28,33 @@ You can `rake benchmark`.
 
 ## benchmark results (i/s)
 
-|                 |   trunk|trunk,--jit|trunk,WITHOUT_RMRWR=1|trunk,--jit,WITHOUT_RMRWR=1|trunk,--disable-gems|trunk,--jit,--disable-gems|trunk,--disable-gems,WITHOUT_RMRWR=1|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|
-|:----------------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|
-|1_000_000.times  |  33.394|  48.658|  40.072|  41.261|  33.641|  69.216|  39.703|  45.048|
+|                     |   trunk|trunk,--jit|trunk,WITHOUT_RMRWR=1|trunk,--jit,WITHOUT_RMRWR=1|trunk,--disable-gems|trunk,--jit,--disable-gems|trunk,--disable-gems,WITHOUT_RMRWR=1|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|
+|:--------------------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|
+|1_000_000.times      |  33.007|  45.427|  39.373|  40.753|  33.264|  74.723|  39.767|  43.804|
+|(1..1_000_000).each  |  33.222|  41.192|  39.281|  40.785|  31.228|  60.986|  39.407|  45.159|
 
 ### Comparison
 |1_000_000.times|||
 |:---|:---|:---|
-|trunk,--jit,--disable-gems|        69.2 i/s |
-|trunk,--jit|        48.7 i/s | 1.42x  slower|
-|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|        45.0 i/s | 1.54x  slower|
-|trunk,--jit,WITHOUT_RMRWR=1|        41.3 i/s | 1.68x  slower|
-|trunk,WITHOUT_RMRWR=1|        40.1 i/s | 1.73x  slower|
-|trunk,--disable-gems,WITHOUT_RMRWR=1|        39.7 i/s | 1.74x  slower|
-|trunk,--disable-gems|        33.6 i/s | 2.06x  slower|
-|   trunk|        33.4 i/s | 2.07x  slower|
+|trunk,--jit,--disable-gems|        74.7 i/s |
+|trunk,--jit|        45.4 i/s | 1.64x  slower|
+|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|        43.8 i/s | 1.71x  slower|
+|trunk,--jit,WITHOUT_RMRWR=1|        40.8 i/s | 1.83x  slower|
+|trunk,--disable-gems,WITHOUT_RMRWR=1|        39.8 i/s | 1.88x  slower|
+|trunk,WITHOUT_RMRWR=1|        39.4 i/s | 1.90x  slower|
+|trunk,--disable-gems|        33.3 i/s | 2.25x  slower|
+|   trunk|        33.0 i/s | 2.26x  slower|
+
+|(1..1_000_000).each|||
+|:---|:---|:---|
+|trunk,--jit,--disable-gems|        61.0 i/s |
+|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|        45.2 i/s | 1.35x  slower|
+|trunk,--jit|        41.2 i/s | 1.48x  slower|
+|trunk,--jit,WITHOUT_RMRWR=1|        40.8 i/s | 1.50x  slower|
+|trunk,--disable-gems,WITHOUT_RMRWR=1|        39.4 i/s | 1.55x  slower|
+|trunk,WITHOUT_RMRWR=1|        39.3 i/s | 1.55x  slower|
+|   trunk|        33.2 i/s | 1.84x  slower|
+|trunk,--disable-gems|        31.2 i/s | 1.95x  slower|
 
 ## Development
 
