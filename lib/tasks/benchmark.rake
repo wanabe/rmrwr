@@ -44,6 +44,5 @@ task :benchmark do
     EOS
 
     x.report "1_000_000.times", %{ 1_000_000.times do end }
-    x.report "ary.bsearch", %{ ary.bsearch do |x| x >= 100 end }
   end
 end

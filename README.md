@@ -31,7 +31,6 @@ You can `rake benchmark`.
 |                 |   trunk|trunk,--jit|trunk,WITHOUT_RMRWR=1|trunk,--jit,WITHOUT_RMRWR=1|trunk,--disable-gems|trunk,--jit,--disable-gems|trunk,--disable-gems,WITHOUT_RMRWR=1|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|
 |:----------------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|
 |1_000_000.times  |  33.394|  48.658|  40.072|  41.261|  33.641|  69.216|  39.703|  45.048|
-|ary.bsearch      |  1.528M|  1.709M|  1.516M|  1.686M|  1.502M|  1.832M|  1.544M|  1.953M|
 
 ### Comparison
 |1_000_000.times|||
@@ -44,17 +43,6 @@ You can `rake benchmark`.
 |trunk,--disable-gems,WITHOUT_RMRWR=1|        39.7 i/s | 1.74x  slower|
 |trunk,--disable-gems|        33.6 i/s | 2.06x  slower|
 |   trunk|        33.4 i/s | 2.07x  slower|
-
-|ary.bsearch|||
-|:---|:---|:---|
-|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|   1952791.0 i/s |
-|trunk,--jit,--disable-gems|   1832116.9 i/s | 1.07x  slower|
-|trunk,--jit|   1709273.5 i/s | 1.14x  slower|
-|trunk,--jit,WITHOUT_RMRWR=1|   1685527.1 i/s | 1.16x  slower|
-|trunk,--disable-gems,WITHOUT_RMRWR=1|   1544009.3 i/s | 1.26x  slower|
-|   trunk|   1528402.4 i/s | 1.28x  slower|
-|trunk,WITHOUT_RMRWR=1|   1515782.6 i/s | 1.29x  slower|
-|trunk,--disable-gems|   1501539.1 i/s | 1.30x  slower|
 
 ## Development
 
