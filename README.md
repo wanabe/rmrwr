@@ -26,24 +26,35 @@ Just `require`.
 
 You can `rake benchmark`.
 
-```
-$ bundle exec rake benchmark
-Warming up --------------------------------------
-                         1_000_000.times     32.141 i/s
-Calculating -------------------------------------
-                                          trunk,env  trunk,--jit,env  trunk,env,WITHOUT_RMRWR=1  trunk,--jit,env,WITHOUT_RMRWR=1  trunk,--disable-gems,env  trunk,--jit,--disable-gems,env 
-                         1_000_000.times     32.882           44.448                     39.098                           37.965                    32.950                          67.853 i/s -     321.000 times in 9.762163s 7.221858s 8.210086s 8.455069s 9.742078s 4.730806s
+## benchmark results (i/s)
 
-Comparison:
-                                      1_000_000.times
-          trunk,--jit,--disable-gems,env:        67.9 i/s 
-                         trunk,--jit,env:        44.4 i/s - 1.53x  slower
-               trunk,env,WITHOUT_RMRWR=1:        39.1 i/s - 1.74x  slower
-         trunk,--jit,env,WITHOUT_RMRWR=1:        38.0 i/s - 1.79x  slower
-                trunk,--disable-gems,env:        32.9 i/s - 2.06x  slower
-                               trunk,env:        32.9 i/s - 2.06x  slower
+|                 |   trunk|trunk,--jit|trunk,WITHOUT_RMRWR=1|trunk,--jit,WITHOUT_RMRWR=1|trunk,--disable-gems|trunk,--jit,--disable-gems|trunk,--disable-gems,WITHOUT_RMRWR=1|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|
+|:----------------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|
+|1_000_000.times  |  33.394|  48.658|  40.072|  41.261|  33.641|  69.216|  39.703|  45.048|
+|ary.bsearch      |  1.528M|  1.709M|  1.516M|  1.686M|  1.502M|  1.832M|  1.544M|  1.953M|
 
-```
+### Comparison
+|1_000_000.times|||
+|:---|:---|:---|
+|trunk,--jit,--disable-gems|        69.2 i/s |
+|trunk,--jit|        48.7 i/s | 1.42x  slower|
+|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|        45.0 i/s | 1.54x  slower|
+|trunk,--jit,WITHOUT_RMRWR=1|        41.3 i/s | 1.68x  slower|
+|trunk,WITHOUT_RMRWR=1|        40.1 i/s | 1.73x  slower|
+|trunk,--disable-gems,WITHOUT_RMRWR=1|        39.7 i/s | 1.74x  slower|
+|trunk,--disable-gems|        33.6 i/s | 2.06x  slower|
+|   trunk|        33.4 i/s | 2.07x  slower|
+
+|ary.bsearch|||
+|:---|:---|:---|
+|trunk,--jit,--disable-gems,WITHOUT_RMRWR=1|   1952791.0 i/s |
+|trunk,--jit,--disable-gems|   1832116.9 i/s | 1.07x  slower|
+|trunk,--jit|   1709273.5 i/s | 1.14x  slower|
+|trunk,--jit,WITHOUT_RMRWR=1|   1685527.1 i/s | 1.16x  slower|
+|trunk,--disable-gems,WITHOUT_RMRWR=1|   1544009.3 i/s | 1.26x  slower|
+|   trunk|   1528402.4 i/s | 1.28x  slower|
+|trunk,WITHOUT_RMRWR=1|   1515782.6 i/s | 1.29x  slower|
+|trunk,--disable-gems|   1501539.1 i/s | 1.30x  slower|
 
 ## Development
 
