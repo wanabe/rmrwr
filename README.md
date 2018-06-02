@@ -22,6 +22,27 @@ Or install it yourself as:
 
 Just `require`.
 
+## Benchmark
+
+You can `rake benchmark`.
+
+```
+$ bundle exec rake benchmark
+Warming up --------------------------------------
+     1_000_000.times     33.719 i/s
+Calculating -------------------------------------
+                          trunk  trunk,--jit  trunk,--disable-gems  trunk,--jit,--disable-gems 
+     1_000_000.times     32.479       42.123                31.591                      72.150 i/s -     337.000 times in 10.375782s 8.000376s 10.667680s 4.670809s
+
+Comparison:
+                  1_000_000.times
+trunk,--jit,--disable-gems:        72.2 i/s 
+         trunk,--jit:        42.1 i/s - 1.71x  slower
+               trunk:        32.5 i/s - 2.22x  slower
+trunk,--disable-gems:        31.6 i/s - 2.28x  slower
+
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
