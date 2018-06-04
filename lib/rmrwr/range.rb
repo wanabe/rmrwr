@@ -6,7 +6,7 @@ module Rmrwr::Range
 
     if first.is_a?(Integer) && last.is_a?(Integer)
       i, lim = first, last
-      if exclude_end?
+      unless exclude_end?
         lim += 1
       end
       while i < lim
